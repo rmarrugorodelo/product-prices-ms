@@ -5,6 +5,7 @@ import com.rmarrugo.domain.ProductPrice;
 import com.rmarrugo.rest.dto.ProductPriceRequest;
 import com.rmarrugo.rest.dto.ProductPriceResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(
@@ -15,6 +16,7 @@ public interface ProductPriceRestMapper {
 
     ProductPrice toDomain(ProductPriceRequest dto);
 
+    @Mapping(target = "brandId", source = "domain.brand.id")
     ProductPriceResponse toResponse(ProductPrice domain);
 
 }

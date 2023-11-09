@@ -4,33 +4,33 @@ import lombok.Value;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Value
 public class ProductPriceRequest {
 
-    @NotBlank
-    String identificationType;
+    @NotNull
+    Long brandId;
 
     @NotNull
-    Integer identificationNumber;
-
-    @NotBlank
-    String firstName;
-
-    String secondName;
-
-    @NotBlank
-    String firstLastName;
-
-
-    String secondLastName;
+    LocalDateTime startDate;
 
     @NotNull
-    Integer phone;
+    LocalDateTime endDate;
+
+    @NotNull
+    Integer priceList;
+
+    @NotNull
+    Long productId;
+
+    @NotNull
+    Integer priority;
+
+    @NotNull
+    BigDecimal price;
 
     @NotBlank
-    String address;
-
-    @NotBlank
-    String city;
+    String curr;
 }

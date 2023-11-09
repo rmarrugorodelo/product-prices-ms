@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Value
 public class ProductPrice {
-    @With
+
     Long id;
 
     Brand brand;
@@ -21,8 +21,10 @@ public class ProductPrice {
 
     Long productId;
 
+    @With
     Integer priority;
 
+    @With
     BigDecimal price;
 
     String curr;

@@ -1,10 +1,24 @@
 package com.rmarrugo.usecase;
 
+import com.rmarrugo.domain.ProductPrice;
+import com.rmarrugo.exception.NotFoundException;
+import com.rmarrugo.faker.TestConstant;
 import com.rmarrugo.port.out.ProductPriceRepository;
+import org.jeasy.random.EasyRandom;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class ProductPriceFinderUseCaseTest {
@@ -15,40 +29,64 @@ class ProductPriceFinderUseCaseTest {
     @InjectMocks
     private ProductPriceFinderUseCase useCase;
 
-   /* @Test
-    void testFindByIdentificationInDatabaseOk() throws NotFoundException, PreconditionFailedException {
-        EasyRandom easyRandom = new EasyRandom();
-        ProductPrice expected = easyRandom.nextObject(ProductPrice.class);
-        expected = expected.withIdentificationNumber(TestConstant.IDENTIFICATION_NUMBER);
-        Mockito.when(repository.findByIdentification(Mockito.any(), Mockito.any()))
-                .thenReturn(Optional.of(expected));
-        ProductPrice productPrice = useCase.findByBranchAndProductAndDate(,
-                IdentificationType.IDENTIFICATION.getCode(), ,
-                expected.getIdentificationNumber(),
+    EasyRandom easyRandom = new EasyRandom();
+
+    private static final LocalDateTime DATE = LocalDateTime.of(2020, 6, 14, 10, 0, 0);
+
+    @Test
+    void whenFindByBrandIdAndProductIdAndDate_thenProductPricesShouldBeFound() throws NotFoundException {
+        final BigDecimal expected = BigDecimal.valueOf(60.90);
+        List<ProductPrice> productPrices = List.of(
+                buildProductPrice(expected, 3),
+                buildProductPrice(BigDecimal.valueOf(55.45), 0),
+                buildProductPrice(BigDecimal.valueOf(45.25), 2)
         );
-        Assertions.assertEquals(expected.getIdentificationNumber(), productPrice.getIdentificationNumber());
+        Mockito.when(repository.findByBrandIdAndProductIdAndDate(Mockito.any(), Mockito.any(), Mockito.any()))
+                .thenReturn(productPrices);
+        ProductPrice productPrice = useCase.findByBrandAndProductAndDate(
+                TestConstant.BRAND_ID,
+                TestConstant.PRODUCT_ID,
+                DATE
+        );
+        Assertions.assertEquals(expected, productPrice.getPrice());
     }
 
     @Test
-    void testFindByIdentificationInDatabaseException() {
-        Mockito.when(repository.findByIdentification(Mockito.any(), Mockito.any()))
-                .thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> useCase.findByBranchAndProductAndDate(,
-                        IdentificationType.IDENTIFICATION.getCode(), ,
-                        TestConstant.IDENTIFICATION_NUMBER,
+    void whenFindByBrandIdAndProductIdAndDateWithEqualsPriority_thenProductPricesShouldBeFound() throws NotFoundException {
+        final BigDecimal expected = BigDecimal.valueOf(55.45);
+        List<ProductPrice> productPrices = List.of(
+                buildProductPrice(expected, 2),
+                buildProductPrice(BigDecimal.valueOf(45.25), 2),
+                buildProductPrice(BigDecimal.valueOf(66.25), 1)
+        );
+        Mockito.when(repository.findByBrandIdAndProductIdAndDate(Mockito.any(), Mockito.any(), Mockito.any()))
+                .thenReturn(productPrices);
+        ProductPrice productPrice = useCase.findByBrandAndProductAndDate(
+                TestConstant.BRAND_ID,
+                TestConstant.PRODUCT_ID,
+                DATE
+        );
+        Assertions.assertEquals(expected, productPrice.getPrice());
+    }
+
+    @Test
+    void whenFindByBrandIdAndProductIdAndDate_givenEmptyList_thenExceptionShouldBeFound() {
+        Mockito.when(repository.findByBrandIdAndProductIdAndDate(Mockito.any(), Mockito.any(), Mockito.any()))
+                .thenReturn(Collections.emptyList());
+        assertThrows(NotFoundException.class, () -> useCase.findByBrandAndProductAndDate(
+                        TestConstant.BRAND_ID,
+                        TestConstant.PRODUCT_ID,
+                        DATE
                 )
         );
     }
 
-    @Test
-    void testFindAllInDatabaseOk() {
-        EasyRandom easyRandom = new EasyRandom();
-        ProductPrice expected = easyRandom.nextObject(ProductPrice.class);
-        expected = expected.withIdentificationNumber(TestConstant.IDENTIFICATION_NUMBER);
-        Mockito.when(repository.findAll())
-                .thenReturn(List.of(expected));
-        List<ProductPrice> productPrices = useCase.findAll();
-        Assertions.assertEquals(expected.getIdentificationNumber(), productPrices.get(0).getIdentificationNumber());
-    }*/
+    private ProductPrice buildProductPrice(BigDecimal price, int priority) {
+        ProductPrice productPrice = easyRandom.nextObject(ProductPrice.class);
+        return productPrice
+                .withPrice(price)
+                .withPriority(priority);
+    }
+
 
 }

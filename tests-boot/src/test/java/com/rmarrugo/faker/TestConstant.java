@@ -5,6 +5,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TestConstant {
 
-    public Integer IDENTIFICATION_NUMBER = 23445322;
-    public Integer BAD_IDENTIFICATION_NUMBER = 34534534;
+    public Long BRAND_ID = 1L;
+    public Long PRODUCT_ID = 35455L;
+
 }

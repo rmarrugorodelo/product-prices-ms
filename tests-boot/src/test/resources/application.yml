@@ -1,8 +1,9 @@
-
+server:
+  servlet:
+    context-path: /
 spring:
-
   datasource:
-    url: jdbc:h2:mem:customers-test
+    url: jdbc:h2:mem:product-prices-test
     username: test
     password: password_test
     driverClassName: org.h2.Driver

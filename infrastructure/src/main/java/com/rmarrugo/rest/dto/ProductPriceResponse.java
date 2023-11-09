@@ -1,5 +1,6 @@
 package com.rmarrugo.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Value;
@@ -11,12 +12,12 @@ import java.time.LocalDateTime;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ProductPriceResponse {
 
-    Long id;
+    Long brandId;
 
-    BrandResponse brand;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     LocalDateTime startDate;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     LocalDateTime endDate;
 
     String priceList;

@@ -24,7 +24,7 @@ public class ProductPriceFinderUseCase implements ProductPriceFinder {
                 productId,
                 date
         );
-        List<ProductPrice> productPrices = repository.findByBrandIdAndProductIdAndDare(brandId, productId, date);
+        List<ProductPrice> productPrices = repository.findByBrandIdAndProductIdAndDate(brandId, productId, date);
         Comparator<ProductPrice> priorityComparator = Comparator.comparing(ProductPrice::getPriority);
         return productPrices
                 .stream()
@@ -39,11 +39,6 @@ public class ProductPriceFinderUseCase implements ProductPriceFinder {
                     );
                     return new NotFoundException("Product price not found");
                 });
-    }
-
-    @Override
-    public List<ProductPrice> findAll() {
-        return repository.findAll();
     }
 
 
