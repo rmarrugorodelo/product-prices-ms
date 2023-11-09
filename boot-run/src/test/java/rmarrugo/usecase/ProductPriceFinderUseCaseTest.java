@@ -1,9 +1,10 @@
-package com.rmarrugo.usecase;
+package rmarrugo.usecase;
 
 import com.rmarrugo.domain.ProductPrice;
 import com.rmarrugo.exception.NotFoundException;
-import com.rmarrugo.faker.TestConstant;
+import rmarrugo.faker.TestConstant;
 import com.rmarrugo.port.out.ProductPriceRepository;
+import com.rmarrugo.usecase.ProductPriceFinderUseCase;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

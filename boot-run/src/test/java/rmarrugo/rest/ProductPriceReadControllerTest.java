@@ -1,7 +1,7 @@
-package com.rmarrugo.rest;
+package rmarrugo.rest;
 
-import com.rmarrugo.config.BaseTest;
-import com.rmarrugo.faker.TestConstant;
+import rmarrugo.config.BaseTest;
+import rmarrugo.faker.TestConstant;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

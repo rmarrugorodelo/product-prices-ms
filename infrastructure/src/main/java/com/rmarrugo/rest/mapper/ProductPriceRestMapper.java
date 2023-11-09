@@ -14,6 +14,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface ProductPriceRestMapper {
 
+    @Mapping(target = "brand.id", source = "brandId")
     ProductPrice toDomain(ProductPriceRequest dto);
 
     @Mapping(target = "brandId", source = "domain.brand.id")
