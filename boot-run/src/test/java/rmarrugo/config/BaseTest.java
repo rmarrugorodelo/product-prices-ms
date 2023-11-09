@@ -1,6 +1,7 @@
-package com.rmarrugo.config;
+package rmarrugo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rmarrugo.Application;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(classes = Application.class)
 public class BaseTest {
 
     @Autowired

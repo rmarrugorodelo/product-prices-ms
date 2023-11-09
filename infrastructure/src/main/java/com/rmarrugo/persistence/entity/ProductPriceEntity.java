@@ -38,7 +38,7 @@ public class ProductPriceEntity {
     LocalDateTime endDate;
 
     @Column(name = "PRICE_LIST")
-    String priceList;
+    Integer priceList;
 
     @Column(name = "PRODUCT_ID", nullable = false)
     Long productId;

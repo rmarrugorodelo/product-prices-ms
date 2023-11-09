@@ -2,7 +2,6 @@ package com.rmarrugo.rest;
 
 import com.rmarrugo.exception.BadRequestException;
 import com.rmarrugo.exception.NotFoundException;
-import com.rmarrugo.exception.PreconditionFailedException;
 import com.rmarrugo.rest.dto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -36,20 +35,6 @@ public class ControllerAdvisor {
         );
     }
 
-    @ExceptionHandler({PreconditionFailedException.class})
-    public ResponseEntity<ErrorResponse> handle(PreconditionFailedException ex,
-                                                HttpServletRequest request) {
-        log.warn(ex.getMessage(), ex);
-        return new ResponseEntity<>(
-                new ErrorResponse(
-                        HttpStatus.PRECONDITION_FAILED.value(),
-                        ex.getMessage(),
-                        request.getRequestURL().toString()
-                ),
-                HttpStatus.PRECONDITION_FAILED
-        );
-    }
-
     @ExceptionHandler({NotFoundException.class})
     public ResponseEntity<ErrorResponse> handle(NotFoundException ex,
                                                 HttpServletRequest request) {
@@ -63,7 +48,6 @@ public class ControllerAdvisor {
                 HttpStatus.NOT_FOUND
         );
     }
-
 
     @ExceptionHandler({
             MissingServletRequestParameterException.class,

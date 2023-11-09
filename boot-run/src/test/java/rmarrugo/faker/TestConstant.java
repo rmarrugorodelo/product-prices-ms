@@ -1,4 +1,4 @@
-package com.rmarrugo.faker;
+package rmarrugo.faker;
 
 import lombok.experimental.UtilityClass;
 

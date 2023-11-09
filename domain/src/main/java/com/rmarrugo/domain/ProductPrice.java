@@ -9,15 +9,19 @@ import java.time.LocalDateTime;
 @Value
 public class ProductPrice {
 
+    @With
     Long id;
 
+    @With
     Brand brand;
 
+    @With
     LocalDateTime startDate;
 
+    @With
     LocalDateTime endDate;
 
-    String priceList;
+    Integer priceList;
 
     Long productId;
 

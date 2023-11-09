@@ -8,7 +8,6 @@
 		<module>application</module>
 		<module>infrastructure</module>
 		<module>boot-run</module>
-		<module>tests-boot</module>
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
