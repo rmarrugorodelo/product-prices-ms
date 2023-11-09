@@ -25,10 +25,6 @@ public class ProductPriceResponse {
 
     Long productId;
 
-    Integer priority;
-
     BigDecimal price;
-
-    String curr;
 
 }

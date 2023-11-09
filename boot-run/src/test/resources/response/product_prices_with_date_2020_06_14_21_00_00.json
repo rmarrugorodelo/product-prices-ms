@@ -4,7 +4,5 @@
     "end_date": "2020-12-31 23:59:59",
     "price_list": "1",
     "product_id": 35455,
-    "priority": 0,
-    "price": 35.50,
-    "curr": "EUR"
+    "price": 35.50
 }
